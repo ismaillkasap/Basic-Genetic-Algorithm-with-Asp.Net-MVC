@@ -1,0 +1,46 @@
+﻿@model GeneticAlgorithm.ViewModels.Items
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h2>Genetic Algorithm Logs</h2>
+    <ul id="iterations">
+        @Html.Partial("_Iteration", Model)
+    </ul>    
+</body>
+</html> 
+
+<script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script>
+    var iteration_number = 1;
+    var status = false;
+
+    function new_iteration() {              
+        $.ajax({
+            url: '/NewIteration',
+            data: { iteration: iteration_number },
+            success: function (data) {                
+                if (data == "NotOk") {
+                    status = true;                    
+                }                
+                else {
+                    $("#iterations").append(data);
+                    iteration_number++;
+                }
+            }
+        });                       
+    }
+    document.onload = new_iteration();
+
+    window.setInterval(function () {
+        if (status != true) {
+            new_iteration();
+            $(document).scrollTop($(document).height());
+        }
+    }, 50);
+
+</script>

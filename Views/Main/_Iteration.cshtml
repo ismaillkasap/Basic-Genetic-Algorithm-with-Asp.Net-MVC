@@ -1,0 +1,39 @@
+﻿@model GeneticAlgorithm.ViewModels.Items
+
+@if(Model.isDone == false)
+{
+    if (Model.log_.iteration == 0)
+    {
+        <h3>Başlangıç Değerleri - @Model.log_.log_time</h3>
+    }
+    else
+    {
+        <h3>@Model.log_.iteration . Iteration - @Model.log_.log_time</h3>
+    }
+
+        <li>
+            <b>a:</b>
+            <span>@Model.log_.a</span>
+        </li>
+        <li>
+            <b>b:</b>
+            <span>@Model.log_.b</span>
+        </li>
+        <li>
+            <b>c:</b>
+            <span>@Model.log_.c</span>
+        </li>
+        <li>
+            <b>d:</b>
+            <span>@Model.log_.d</span>
+        </li>
+
+        @:******************************
+
+        <br/>
+}
+else
+{    
+    <h3>The desired result has been found in the @(Model.log_.iteration-1). iteration.</h3> 
+}
+
